@@ -1,421 +1,600 @@
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <!-- basic -->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-         <!-- mobile metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-   
-      <!-- site metas -->
-      <title>Dona Sucos</title>
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <!-- bootstrap css -->
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <!-- style css -->
-      <link rel="stylesheet" href="css/style.css">
-      <!-- Responsive-->
-      <link rel="stylesheet" href="css/responsive.css">
-      <!-- fevicon -->
-      <link rel="icon" href="images/fevicon.png" type="image/gif" />
-      <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <link rel="icon" type="image" sizes="16x16" href="images/extrair.png">
+  <title>Dona Sucos</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-      
-   </head>
-   <body class="main-layout">
-      <!-- loader  -->
-      <div class="loader_bg">
-         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+  <link rel="icon" type="image" sizes="16x16" href="images/extrair.png">
+</head>
+<body class="main-layout">
+  <div class="loader_bg">
+    <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+  </div>
+
+  <div id="search_overlay" class="search_overlay">
+    <button type="button" class="search_close" id="search_close">&times;</button>
+    <div class="search_box">
+      <input type="text" id="search_input" class="search_input" placeholder="O que você procura?">
+      <button type="button" class="search_btn" id="search_btn">Aplicar</button>
+    </div>
+  </div>
+
+  <div id="cart_overlay" class="cart_overlay"></div>
+  <aside id="cart_sidebar" class="cart_sidebar">
+    <div class="cart_header">
+      <h3>Seu Pedido</h3>
+      <button type="button" class="cart_close" id="cart_close" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="cart_body" id="cart_body">
+      <p class="cart_empty" id="cart_empty">Nenhum item no pedido ainda.</p>
+    </div>
+    <div class="cart_footer">
+      <div class="cart_total">
+        <span>Total</span>
+        <strong id="cart_total">R$ 0</strong>
       </div>
-      <header>
-         <!-- header inner -->
-         <div class="header">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                     <div class="full">
-                        <div class="center-desk">
-                           <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="Logo Dona Sucos" /></a> <div class="title"> <div style="height: 24px;">Dona </div> <div>Sucos</div> </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarsExample04">
-                           <ul class="navbar-nav mr-auto">
-                              <li class="nav-item active">
-                                 <a class="nav-link" href="index.html">Início</a>
-                              </li>
-                              <li class="nav-item ">
-                                 <a class="nav-link" href="about.html">Sobre Nós</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="juice.html">Pedir Suco</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="time.html">Nosso Time</a>
-                              </li>
-                              <li class="nav-item">
-                                 <a class="nav-link" href="contact.html">Contato</a>
-                              </li>
-                              <li class="nav-item d_none">
-                                 <a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                              </li>
-                           </ul>
-                        </div>
-                     </nav>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </header>
+      <button type="button" class="cart_send" id="cart_send">Peça Agora</button>
+    </div>
+  </aside>
 
-      <!-- banner -->
-     <section class="banner_main">
-   <div class="container">
+  <button type="button" class="floating_cart" id="floating_cart" aria-label="Abrir pedidos">
+    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+    <span class="floating_cart_count" id="floating_cart_count">0</span>
+  </button>
+
+  <div id="toast" class="toast"></div>
+
+  <header>
+    <div class="header">
+      <div class="container">
+        <div class="header_inner">
+          <div class="logo_section">
+            <div class="logo">
+              <a href="index.html"><img src="images/logo.png" alt="Logo Dona Sucos" /></a>
+              <div class="title">
+                <div style="height: 24px;">Dona</div>
+                <div>Sucos</div>
+              </div>
+            </div>
+          </div>
+
+          <nav class="custom_nav">
+            <ul class="custom_nav_list">
+              <li><a class="custom_nav_link active" href="#banner_main">Início</a></li>
+              <li><a class="custom_nav_link" href="#juices">Cardápio</a></li>
+              <li><a class="custom_nav_link" href="#" id="open_cart_menu">Seus Pedidos</a></li>
+              <li><a class="custom_nav_link" href="#contact">Contato</a></li>
+              <li>
+                <a class="custom_nav_link custom_nav_search" href="#" id="open_search" aria-label="Abrir busca">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+
+            <div class="custom_nav_mobile_btns">
+              <button type="button" class="custom_search_btn" id="open_search_mobile" aria-label="Abrir busca">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="custom_hamburger" id="hamburger_btn" aria-label="Abrir menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="banner_main" class="banner_main">
+    <div class="container">
       <div class="row">
-         <div class="col-md-6">
-            <div class="test_box">
-               <div class="text-bg">
-                  <h1><span>Seja Bem-vindo</span> <br>Dona Sucos</h1>
-                  <p>Descubra sabores naturais, refrescantes e saudáveis! Aqui você encontra sucos preparados com frutas frescas, sem conservantes, e cheios de energia para o seu dia.</p>
-                  <a class="read_more" href="#">Saiba Mais</a>
-               </div>
+        <div class="col-md-6">
+          <div class="test_box">
+            <div class="text-bg">
+              <h1><span>Seja Bem-vindo</span> <br>Dona Sucos</h1>
+              <p>Sabores naturais, refrescantes e saudáveis! Aqui você encontra sucos preparados com frutas frescas, sem conservantes, e cheios de energia para o seu dia.</p>
             </div>
-         </div>
+          </div>
+        </div>
 
-               <div class="col-md-6">
-                  <div id="banner1" class="carousel slide banner_Carousel " data-ride="carousel">
-                     <ol class="carousel-indicators">
-                        <li data-target="#banner1" data-slide-to="0" class="active"></li>
-                        <li data-target="#banner1" data-slide-to="1"></li>
-                        <li data-target="#banner1" data-slide-to="2"></li>
-                        <li data-target="#banner1" data-slide-to="3"></li>
-                     </ol>
-                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                           <div class="container">
-                              <div class="carousel-caption ">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="banner_img">
-                                          <figure><img src="images/banner_img.png" alt="#"/></figure>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+        <div class="col-md-6">
+          <div id="banner1" class="carousel slide banner_Carousel" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#banner1" data-slide-to="0" class="active"></li>
+              <li data-target="#banner1" data-slide-to="1"></li>
+              <li data-target="#banner1" data-slide-to="2"></li>
+              <li data-target="#banner1" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="banner_img">
+                          <figure><img src="images/banner_img.png" alt="#"/></figure>
                         </div>
-                        <div class="carousel-item">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="banner_img">
-                                          <figure><img src="images/banner_img.png" alt="#"/></figure>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="banner_img">
-                                          <figure><img src="images/banner_img.png" alt="#"/></figure>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="banner_img">
-                                          <figure><img src="images/banner_img.png" alt="#"/></figure>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
-                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Previous</span>
-                     </a>
-                     <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
-                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Next</span>
-                     </a>
+                      </div>
+                    </div>
                   </div>
-               </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="banner_img">
+                          <figure><img src="images/banner_img.png" alt="#"/></figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="banner_img">
+                          <figure><img src="images/banner_img.png" alt="#"/></figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="banner_img">
+                          <figure><img src="images/banner_img.png" alt="#"/></figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-         </div>
-      </section>
-
-           <!-- sobre -->
-      <div class="about">
-         <div class="container">
-            <div class="row d_flex">
-               <div class="col-md-7">
-                  <div class="about_img">
-                     <figure><img src="images/about.png" alt="Imagem sobre" /></figure>
-                  </div>
-               </div>
-               <div class="col-md-5">
-                  <div class="titlepage">
-                     <h2>Sobre Nós</h2>
-                     <p>Na Dona Sucos, acreditamos que saúde e sabor podem andar de mãos dadas. Fundada com amor por ingredientes naturais, nossa missão é oferecer sucos 100% frescos, nutritivos e cheios de vida, feitos com frutas selecionadas e sem adição de conservantes.
-
-                     Seja para começar bem o dia, acompanhar uma refeição leve ou recarregar as energias, temos o suco ideal para você.</p>
-                     <a class="read_more" href="#">Saiba Mais</a>
-                  </div>
-               </div>
-            </div>
-         </div>
+            <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
+  <div id="about" class="about">
+    <div class="container">
+      <div class="row d_flex">
+        <div class="col-md-7">
+          <div class="about_img">
+            <figure><img src="images/about.png" alt="Imagem sobre" /></figure>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="titlepage">
+            <h2>Sobre</h2>
+            <p>Na Dona Sucos, acreditamos que saúde e sabor podem andar de mãos dadas. Fundada com amor por ingredientes naturais, nossa missão é oferecer sucos 100% frescos, nutritivos e cheios de vida, feitos com frutas selecionadas e sem adição de conservantes.
 
-      <div class="juices ">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Nossos Sucos</h2>
-                     <p>Descubra os sabores incríveis dos nossos sucos naturais preparados com frutas frescas e amor.</p>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-4">
-                  <div class="our_main_box">
-                     <div class="our_img">
-                        <figure><img src="images/our1.png" alt="#"/></figure>
-                     </div>
-                     <div class="our_text">
-                        <h4>R$<strong class="yellow">10</strong></h4>
-                        <h3>Suco de Laranja</h3>
-                        <p>Refrescante, nutritivo e feito com laranjas selecionadas.</p>
-                        <a class="read_more" href="#">Peça Agora</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-               </div>
-               <div class="col-md-4">
-                  <div class="our_main_box">
-                     <div class="our_img">
-                        <figure><img src="images/our2.png" alt="#"/></figure>
-                     </div>
-                     <div class="our_text">
-                        <h4>R$<strong class="yellow">18</strong></h4>
-                        <h3>Suco de Lixia</h3>
-                        <p>Ajuda na desintoxicação e hidratação do seu corpo.</p>
-                        <a class="read_more" href="#">Peça Agora</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4 ">
-                  <div class="our_main_box">
-                     <div class="our_img">
-                        <figure><img src="images/our3.png" alt="#"/></figure>
-                     </div>
-                     <div class="our_text">
-                        <h4>R$<strong class="yellow">15</strong></h4>
-                        <h3>Suco de Romã</h3>
-                        <p>Delicioso suco feito com romãs fresquinhos e naturais.</p>
-                        <a class="read_more" href="#">Peça Agora</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4 margin_top">
-                  <div class="our_main_box">
-                     <div class="our_img">
-                        <figure><img src="images/our4.png" alt="#"/></figure>
-                     </div>
-                     <div class="our_text">
-                        <h4>R$<strong class="yellow">17</strong></h4>
-                        <h3>Suco de Maça</h3>
-                        <p>Cremosidade e sabor delicioso em cada gole.</p>
-                        <a class="read_more" href="#">Peça Agora</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="our_main_box">
-                     <div class="our_img">
-                        <figure><img src="images/our5.png" alt="#"/></figure>
-                     </div>
-                     <div class="our_text">
-                        <h4>R$<strong class="yellow">20</strong></h4>
-                        <h3>Suco de Abacaxi</h3>
-                        <p>Refrescante e sabor tropical em cada gole.</p>
-                        <a class="read_more" href="#">Peça Agora</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+            Seja para começar bem o dia, acompanhar uma refeição leve ou recarregar as energias, temos o suco ideal para você.</p>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="testimonial">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Nosso Time</h2>
-                     <p>Veja o nosso time da Dona Sucos!</p>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-12">
-                  <div id="myCarousel" class="carousel slide testimonial_Carousel" data-ride="carousel">
-                     <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                     </ol>
-                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="test_box">
-                                          <i><img src="images/Eu.jpg" alt="Cliente" /></i>
-                                          <h4>Matheus</h4>
-                                          <p>Os sucos da Dona Sucos são maravilhosos! Sempre fresquinhos, naturais e com um sabor incomparável. Recomendo para todos que buscam saúde com sabor!</p>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="test_box">
-                                          <i><img src="images/Eu.jpg" alt="Cliente" /></i>
-                                          <h4>Matheus</h4>
-                                          <p>Os sucos da Dona Sucos são maravilhosos! Sempre fresquinhos, naturais e com um sabor incomparável. Recomendo para todos que buscam saúde com sabor!</p>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="container">
-                              <div class="carousel-caption">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="test_box">
-                                          <i><img src="images/Eu.jpg" alt="Cliente" /></i>
-                                          <h4>Matheus</h4>
-                                          <p>Os sucos da Dona Sucos são maravilhosos! Sempre fresquinhos, naturais e com um sabor incomparável. Recomendo para todos que buscam saúde com sabor!</p>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Anterior</span>
-                     </a>
-                     <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                     <span class="sr-only">Próximo</span>
-                     </a>
-                  </div>
-               </div>
-            </div>
-         </div>
+  <div id="juices" class="juices">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="titlepage">
+            <h2>Cardápio</h2>
+            <p>Peça agora por esse cardápio digital e aguarde que a cozinha prepare seu suco com todo carinho.</p>
+          </div>
+        </div>
       </div>
-
-      <!--  footer -->
-      <footer id="contact">
-         <div class="footer">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="titlepage">
-                        <h2>Fale Conosco</h2>
-                     </div>
-                  </div>
-                  <div class="col-md-10 offset-md-1">
-                     <form id="request" class="main_form">
-                        <div class="row">
-                           <div class="col-md-12 ">
-                              <input class="contactus" placeholder="Nome Completo" type="text" name="Nome"> 
-                           </div>
-                           <div class="col-md-7">
-                              <input class="contactus" placeholder="E-mail" type="email" name="Email"> 
-                           </div>
-                           <div class="col-md-7">
-                              <input class="contactus" placeholder="Telefone" type="tel" name="Telefone">                          
-                           </div>
-                           
-                           <div class="col-md-12">
-                              <textarea class="contactus1" placeholder="Mensagem" name="Mensagem"></textarea>
-                           </div>
-                           <div class="col-md-12">
-                              <button class="send_btn">Enviar</button>
-                           </div>
-                        </div>
-                     </form>
-                  </div>
-                  <div class="col-md-10 offset-md-1">
-                     <ul class="location_icon">
-                        <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Localização</li>
-                        <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> +55 11 98765-4321</li>
-                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a> contato@donasucos.com</li>
-                     </ul>
-                  </div>
-               </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="our_main_box">
+            <div class="our_img">
+              <figure><img src="images/produtos/laranja.png" alt="#"/></figure>
             </div>
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <p>Copyright 2025 Todos os direitos reservados - <a href="https://matheus-abib-portfolio.netlify.app/" target="_blank"> Matheus Abib</a></p>
-                     </div>
-                  </div>
-               </div>
+            <div class="our_text">
+              <h4>R$<strong class="yellow">10</strong></h4>
+              <h3>Suco de Laranja</h3>
+              <a class="read_more add_to_cart" href="#" data-produto="Suco de Laranja" data-preco="10" data-img="images/produtos/laranja.png">Peça Agora</a>
             </div>
-         </div>
-      </footer>
+          </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+          <div class="our_main_box">
+            <div class="our_img">
+              <figure><img src="images/produtos/lixia.png" alt="#"/></figure>
+            </div>
+            <div class="our_text">
+              <h4>R$<strong class="yellow">18</strong></h4>
+              <h3>Suco de Lixia</h3>
+              <a class="read_more add_to_cart" href="#" data-produto="Suco de Lixia" data-preco="18" data-img="images/produtos/lixia.png">Peça Agora</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="our_main_box">
+            <div class="our_img">
+              <figure><img src="images/produtos/roma.png" alt="#"/></figure>
+            </div>
+            <div class="our_text">
+              <h4>R$<strong class="yellow">15</strong></h4>
+              <h3>Suco de Romã</h3>
+              <a class="read_more add_to_cart" href="#" data-produto="Suco de Romã" data-preco="15" data-img="images/produtos/roma.png">Peça Agora</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 margin_top">
+          <div class="our_main_box">
+            <div class="our_img">
+              <figure><img src="images/produtos/maca.png" alt="#"/></figure>
+            </div>
+            <div class="our_text">
+              <h4>R$<strong class="yellow">17</strong></h4>
+              <h3>Suco de Maça</h3>
+              <a class="read_more add_to_cart" href="#" data-produto="Suco de Maça" data-preco="17" data-img="images/produtos/maca.png">Peça Agora</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="our_main_box">
+            <div class="our_img">
+              <figure><img src="images/produtos/abacaxi.png" alt="#"/></figure>
+            </div>
+            <div class="our_text">
+              <h4>R$<strong class="yellow">20</strong></h4>
+              <h3>Suco de Abacaxi</h3>
+              <a class="read_more add_to_cart" href="#" data-produto="Suco de Abacaxi" data-preco="20" data-img="images/produtos/abacaxi.png">Peça Agora</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <!-- Javascript-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-   </body>
+  <div class="testimonial">
+  </div>
+
+  <footer id="contact">
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="titlepage">
+              <h2>Fale Conosco</h2>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <ul class="location_icon">
+              <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Localização</li>
+              <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> +55 11 01020-0908</li>
+              <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a> contato@donasucos.com</li>
+            </ul>
+          </div>
+
+          <div class="col-md-10 offset-md-1">
+            <form id="request" class="main_form" novalidate>
+              <div class="row">
+                <div class="col-md-12">
+                  <input class="contactus" placeholder="Nome Completo" type="text" name="Nome" required>
+                </div>
+                <div class="col-md-7">
+                  <input class="contactus" placeholder="E-mail" type="email" name="Email" required>
+                </div>
+                <div class="col-md-7">
+                  <input class="contactus" placeholder="Telefone" type="tel" name="Telefone" required>
+                </div>
+                <div class="col-md-12">
+                  <textarea class="contactus1" placeholder="Mensagem" name="Mensagem" required></textarea>
+                </div>
+                <div class="col-md-12">
+                  <button class="send_btn" type="submit">Enviar</button>
+                </div>
+              </div>
+              <p class="form_feedback" id="form_feedback"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p>Copyright 2025 Todos os direitos reservados - <a href="https://matheus-abib-portfolio.netlify.app/" target="_blank"> Matheus Abib</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery-3.0.0.min.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var overlay = document.getElementById('search_overlay');
+      var openBtn = document.getElementById('open_search');
+      var openBtnMobile = document.getElementById('open_search_mobile');
+      var closeBtn = document.getElementById('search_close');
+      var applyBtn = document.getElementById('search_btn');
+      var input = document.getElementById('search_input');
+      var loader = document.querySelector('.loader_bg');
+
+      var hamburger = document.getElementById('hamburger_btn');
+      var navList = document.querySelector('.custom_nav_list');
+
+      var cartSidebar = document.getElementById('cart_sidebar');
+      var cartOverlay = document.getElementById('cart_overlay');
+      var cartClose = document.getElementById('cart_close');
+      var cartBody = document.getElementById('cart_body');
+      var cartTotalEl = document.getElementById('cart_total');
+      var cartSend = document.getElementById('cart_send');
+      var addButtons = document.querySelectorAll('.add_to_cart');
+      var openCartMenu = document.getElementById('open_cart_menu');
+      var floatingCart = document.getElementById('floating_cart');
+      var floatingCartCount = document.getElementById('floating_cart_count');
+
+      var toast = document.getElementById('toast');
+      var toastTimer = null;
+
+      var cart = [];
+
+      function showToast(message, type) {
+        toast.textContent = message;
+        toast.className = 'toast show' + (type ? ' ' + type : '');
+        if (toastTimer) {
+          clearTimeout(toastTimer);
+        }
+        toastTimer = setTimeout(function () {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+
+      function updateFloatingCount() {
+        var totalQtd = cart.reduce(function (acc, item) {
+          return acc + item.qtd;
+        }, 0);
+        floatingCartCount.textContent = totalQtd;
+        if (totalQtd > 0) {
+          floatingCart.classList.add('has_items');
+        } else {
+          floatingCart.classList.remove('has_items');
+        }
+      }
+
+      function openOverlaySearch(e) {
+        e.preventDefault();
+        overlay.classList.add('active');
+        setTimeout(function () { input.focus(); }, 100);
+      }
+
+      openBtn.addEventListener('click', openOverlaySearch);
+      openBtnMobile.addEventListener('click', openOverlaySearch);
+
+      closeBtn.addEventListener('click', function () {
+        overlay.classList.remove('active');
+      });
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+          overlay.classList.remove('active');
+        }
+      });
+
+      hamburger.addEventListener('click', function () {
+        var isOpen = navList.classList.toggle('open');
+        hamburger.classList.toggle('is_open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      navList.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          navList.classList.remove('open');
+          hamburger.classList.remove('is_open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      function openCart() {
+        cartSidebar.classList.add('active');
+        cartOverlay.classList.add('active');
+      }
+
+      function closeCart() {
+        cartSidebar.classList.remove('active');
+        cartOverlay.classList.remove('active');
+      }
+
+      function renderCart() {
+        cartBody.innerHTML = '';
+        if (cart.length === 0) {
+          cartBody.innerHTML = '<p class="cart_empty">Nenhum item no pedido ainda.</p>';
+        } else {
+          cart.forEach(function (item, index) {
+            var row = document.createElement('div');
+            row.className = 'cart_item';
+            row.innerHTML =
+              '<div class="cart_item_thumb">' +
+                '<img src="' + item.img + '" alt="' + item.nome + '">' +
+              '</div>' +
+              '<div class="cart_item_content">' +
+                '<div class="cart_item_info">' +
+                  '<span class="cart_item_name">' + item.nome + '</span>' +
+                  '<span class="cart_item_price">R$ ' + item.preco + '</span>' +
+                '</div>' +
+                '<div class="cart_item_actions">' +
+                  '<button type="button" class="cart_qty_btn" data-action="minus" data-index="' + index + '">−</button>' +
+                  '<span class="cart_qty">' + item.qtd + '</span>' +
+                  '<button type="button" class="cart_qty_btn" data-action="plus" data-index="' + index + '">+</button>' +
+                  '<button type="button" class="cart_remove" data-action="remove" data-index="' + index + '">Remover</button>' +
+                '</div>' +
+              '</div>';
+            cartBody.appendChild(row);
+          });
+        }
+        var total = cart.reduce(function (acc, item) {
+          return acc + (item.preco * item.qtd);
+        }, 0);
+        cartTotalEl.textContent = 'R$ ' + total;
+        updateFloatingCount();
+      }
+
+      cartBody.addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        var action = btn.getAttribute('data-action');
+        var index = parseInt(btn.getAttribute('data-index'), 10);
+        if (isNaN(index)) return;
+
+        if (action === 'plus') {
+          cart[index].qtd += 1;
+        } else if (action === 'minus') {
+          cart[index].qtd -= 1;
+          if (cart[index].qtd <= 0) {
+            cart.splice(index, 1);
+          }
+        } else if (action === 'remove') {
+          cart.splice(index, 1);
+        }
+        renderCart();
+      });
+
+      addButtons.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var nome = btn.getAttribute('data-produto');
+          var preco = parseFloat(btn.getAttribute('data-preco'));
+          var img = btn.getAttribute('data-img');
+          var existing = cart.find(function (item) {
+            return item.nome === nome;
+          });
+          if (existing) {
+            existing.qtd += 1;
+          } else {
+            cart.push({ nome: nome, preco: preco, qtd: 1, img: img });
+          }
+          renderCart();
+          showToast(nome + ' adicionado em pedidos!', 'success');
+        });
+      });
+
+      openCartMenu.addEventListener('click', function (e) {
+        e.preventDefault();
+        openCart();
+      });
+
+      floatingCart.addEventListener('click', openCart);
+
+      cartClose.addEventListener('click', closeCart);
+      cartOverlay.addEventListener('click', closeCart);
+
+      cartSend.addEventListener('click', function () {
+        if (cart.length === 0) {
+          return;
+        }
+        closeCart();
+        loader.style.display = 'flex';
+        loader.style.opacity = '1';
+        setTimeout(function () {
+          loader.style.opacity = '0';
+          setTimeout(function () {
+            loader.style.display = 'none';
+            cart = [];
+            renderCart();
+            showToast('Pedido enviado para a cozinha!', 'success');
+          }, 400);
+        }, 2000);
+      });
+
+      var form = document.getElementById('request');
+      var feedback = document.getElementById('form_feedback');
+      var feedbackTimer = null;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var nome = form.querySelector('[name="Nome"]').value.trim();
+        var email = form.querySelector('[name="Email"]').value.trim();
+        var tel = form.querySelector('[name="Telefone"]').value.trim();
+        var msg = form.querySelector('[name="Mensagem"]').value.trim();
+
+        if (feedbackTimer) {
+          clearTimeout(feedbackTimer);
+        }
+
+        if (!nome || !email || !tel || !msg) {
+          feedback.textContent = 'Todos os campos são obrigatórios.';
+          feedback.classList.add('error');
+          feedback.classList.remove('success');
+        } else {
+          feedback.textContent = 'Mensagem enviada com sucesso!';
+          feedback.classList.add('success');
+          feedback.classList.remove('error');
+          form.reset();
+        }
+
+        feedbackTimer = setTimeout(function () {
+          feedback.textContent = '';
+          feedback.classList.remove('error');
+          feedback.classList.remove('success');
+        }, 3000);
+      });
+
+      function triggerLoader() {
+        overlay.classList.remove('active');
+        loader.style.display = 'flex';
+        loader.style.opacity = '1';
+        setTimeout(function () {
+          loader.style.opacity = '0';
+          setTimeout(function () {
+            loader.style.display = 'none';
+          }, 400);
+        }, 2000);
+      }
+
+      applyBtn.addEventListener('click', triggerLoader);
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          triggerLoader();
+        }
+      });
+    });
+  </script>
+  <script src="js/custom.js"></script>
+</body>
 </html>
-
