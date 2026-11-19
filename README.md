@@ -2,6 +2,7 @@
 
 Site oficial da **Dona Sucos**, uma loja de sucos naturais, saudáveis e refrescantes.  
 Projeto 100% front-end, feito com HTML, CSS e JavaScript puro — sem frameworks de build, sem back-end.
+O intuito foi treinar minhas habilidades com HTML, CSS e JavaScript puro.
 
 > 🔗 **Acesse online:** (https://matheusabib.github.io/Loja-de-Sucos/)
 
